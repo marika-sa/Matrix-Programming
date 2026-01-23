@@ -4,6 +4,9 @@
 
 package com.mycompany.arraysearch;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 /**
  *
  * @author Marika
@@ -11,6 +14,55 @@ package com.mycompany.arraysearch;
 public class ArraySearch {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Scanner scannerObj = new Scanner(System.in);
+        
+        int arraySize;
+        do {
+            System.out.println("Enter array size: ");
+            while (!scannerObj.hasNextInt()){
+                System.out.println("That is not a valid array size!");
+                scannerObj.next();
+            }
+            arraySize = scannerObj.nextInt();
+            // Adding this line as nextInt() leaves a newline character in the buffer and can prevent reading the next input
+            scannerObj.nextLine();
+        } while (arraySize < 0);
+        
+        String arrayElements;
+        int[] userArray = new int[arraySize];
+        boolean isValid = false;
+        
+        do {
+            System.out.println("Enter the " + arraySize + " array elements: ");
+            arrayElements = scannerObj.nextLine();
+            
+            if (arrayElements.isEmpty()){
+                System.out.println("Array can't be empty. Please enter array elements: ");
+                // Jumping back to start of the do while loop.
+                continue;
+            }
+            
+            try {
+                // Using regular expression for splitting the user input in case a user leaves multiple spaces between entries
+                String[] tempArray = arrayElements.split("\\s+");
+                
+                if (tempArray.length != arraySize){
+                    System.out.println("Array too short. You provided " + tempArray.length + " but array size must be " + arraySize);
+                } else {
+                    int i = 0;
+                    while (i < arraySize && i < tempArray.length) {
+                        userArray[i] = Integer.parseInt(tempArray[i]);
+                        i++;
+                    }
+                    isValid = true;
+                }
+            } catch (NumberFormatException e){
+                System.out.println("Invalid input: Must be whole numbers only.");
+            }
+            
+        } while (!isValid);
+        
+        System.out.println("The size of your array: " + arraySize + "\n" + "Your array :" + Arrays.toString(userArray));
+        
     }
 }
