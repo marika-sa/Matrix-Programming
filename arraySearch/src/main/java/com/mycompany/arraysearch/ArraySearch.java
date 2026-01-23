@@ -62,7 +62,31 @@ public class ArraySearch {
             
         } while (!isValid);
         
-        System.out.println("The size of your array: " + arraySize + "\n" + "Your array :" + Arrays.toString(userArray));
+        int repeatedNumber = firstRepeatingElement(userArray, arraySize);
         
+        if (repeatedNumber == -1){
+            System.out.println("Your array had not repeated values.");
+        } else {
+            System.out.println("The first repeated value in your array is: " + repeatedNumber);
+        }
+        
+        //System.out.println("The size of your array: " + arraySize + "\n" + "Your array :" + Arrays.toString(userArray));
+        
+    }
+    
+    static int firstRepeatingElement(int[] arr, int n){
+        
+        // First loop to get a number arr[i] from the array
+        for (int i = 0; i < n - 1 ; i++){
+            // Then looping again to the next number arr[j] which is the number after arr[i]
+            for (int j = i + 1; j < n; j++){
+                // Lastly comparing the two numbers to see if they are the same, returning the repeated number
+                if (arr[i] == arr[j]){
+                    return arr[i];
+                }
+            }
+        }
+        
+        return -1;
     }
 }
