@@ -57,16 +57,49 @@ public class MatricDiagonalSum {
         
         System.out.println("Your matrix table is ready:");
         
-        for (int row = 0; row <  userMatrix.length; row++){
+        for (int row = 0; row < userMatrix.length; row++){
             for (int col = 0; col < userMatrix[row].length; col++){
                 System.out.printf("%5d", userMatrix[row][col]);
             }
             System.out.println("");
         }
+        
+        int mainDiagonalSum = mainDiagonal(userMatrix);
+        
+        System.out.println("Your main diagonal sum is: " + mainDiagonalSum);
+        
+        int secondaryDiagonalSum = secondaryDiagonal(userMatrix);
+        
+        System.out.println("Your secondary diagonal sum is: " + secondaryDiagonalSum);
 
     }
     
-//    static int[] stringToIntArr(String userInput){
-//        String userInputArray = userInput.split(" ");
-//    }
+    static int mainDiagonal(int[][] userMatrix){
+        int mainDiagonalSum = 0;
+        
+        for (int row = 0; row < userMatrix.length; row++){
+            for (int col = 0; col < userMatrix.length; col++){
+                if (row == col){
+                    mainDiagonalSum += userMatrix[row][col];
+                }
+            }
+        }
+        
+        return mainDiagonalSum;
+    }
+    
+    // For the secondary diagonal, for a[i][j] where i+j = n-1
+    static int secondaryDiagonal(int[][] userMatrix){
+        int secondaryDiagonalSum = 0;
+        
+        for (int row = 0; row < userMatrix.length; row++){
+            for (int col = 0; col < userMatrix.length; col++){
+                if (row + col == userMatrix.length - 1){
+                    secondaryDiagonalSum += userMatrix[row][col];
+                }
+            }
+        }
+        
+        return secondaryDiagonalSum;
+    }
 }
