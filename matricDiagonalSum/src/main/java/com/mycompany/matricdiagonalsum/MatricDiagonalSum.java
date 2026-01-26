@@ -12,8 +12,6 @@ import java.util.Scanner;
 public class MatricDiagonalSum {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        
         Scanner so = new Scanner(System.in);
         
         int matrixSize;
@@ -32,7 +30,6 @@ public class MatricDiagonalSum {
         } while (matrixSize < 0);
         
         int[][] userMatrix = new int[matrixSize][];
-        int[] matrixLine = new int[matrixSize];
         
         for (int row = 0; row < userMatrix.length; row++){
             System.out.println("Enter row " + (row + 1) + " in the format: x y z...");
