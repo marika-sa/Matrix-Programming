@@ -3,6 +3,7 @@
  */
 
 package com.mycompany.matrixspiraltraversal;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -63,5 +64,49 @@ public class MatrixSpiralTraversal {
         }
         
         System.out.println("Your row value is " + rowValue + " and column value is " + colValue);
+        
+        System.out.println("\nYour spiral traversal is as follows: " + Arrays.toString(spiralTraversal(userMatrix, rowValue, colValue)));
     }
+    
+    public static int[] spiralTraversal(int[][] matrix, int numRows, int numCols){
+        int matrixSize = numRows*numCols;
+        int[] spiral = new int[matrixSize];
+        
+        // The pattern of the spiral movement is: right(0,1), down(1,0), left(0,-1), up(-1,0)
+        int[] directions = {0,1,0,-1,0};
+        
+        // boolean for tracking the matric values that were visited
+        boolean[][] trackingArr = new boolean[numRows][numCols];
+        
+        int currentRow = 0;
+        int currentCol = 0;
+        
+        // The direction index
+        int k = 0;
+        
+        for (int count = 0; count < matrixSize; count++){
+            spiral[count] = matrix[currentRow][currentCol];
+            trackingArr[currentRow][currentCol] = true;
+            
+            // Calculating the next position based on the current direction
+            int nextRow = currentRow + directions[k];
+            int nextCol = currentCol + directions[k+1];
+            
+            // Change direction if next is out of bounds
+            // if the nextRow is less than 0, or is greater/equal to numRows
+            // if the nextCol is less than 0, or is greater/equal to numCols
+            // OR Change direction if the position has already been visited
+            // if trackingArr[nextRow][nextCol] is true
+            if (nextRow < 0 || nextRow >= numRows || nextCol < 0 || nextCol >= numCols || trackingArr[nextRow][nextCol]){
+                // return a new value for the direction index is the directions changes
+                k = (k + 1) % 4;
+            }
+            
+            currentRow += directions[k];
+            currentCol += directions[k+1];
+        }
+        
+        return spiral;
+    }
+    
 }
